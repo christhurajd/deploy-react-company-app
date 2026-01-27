@@ -51,6 +51,7 @@ function Contact() {
         </p>
       )}
 
+
       <form onSubmit={handleSubmit} style={styles.form}>
         <input
           name="name"
