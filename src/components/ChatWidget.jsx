@@ -34,7 +34,7 @@ function ChatWidget() {
       {open && (
         <div className="chat-box">
           <div className="chat-header">
-            <span>APCS Support</span>
+            <span>Customer Support</span>
             <button onClick={() => setOpen(false)}>✖</button>
           </div>
 

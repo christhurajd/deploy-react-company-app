@@ -261,9 +261,9 @@ function Home() {
 
       {/* Call to Action */}
       <section style={styles.cta}>
-        <h2>Ready to start your project?</h2>
+        <h2>Ready to take the next step?</h2>
         <Link to="/contact">
-        <button style={styles.ctaBtn}>Contact Us</button>
+        <button style={styles.ctaBtn}>Get in touch</button>
         </Link>
       </section>
 <br/>
