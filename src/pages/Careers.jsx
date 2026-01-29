@@ -5,15 +5,15 @@ function Careers() {
   const [jobs] = useState([
     {
       id: 1,
-      title: "React Developer",
+      title: "ASP.NET Core Web API & Entity Framework Core",
       location: "Remote",
       experience: "2+ Years"
     },
     {
       id: 2,
-      title: "Node.js Developer",
-      location: "Chennai",
-      experience: "3+ Years"
+      title: "React Js & Node.js Developer",
+      location: "Remote",
+      experience: "1+ Years"
     },
     {
       id: 3,

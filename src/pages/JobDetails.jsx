@@ -15,7 +15,7 @@ function JobDetails() {
       <p><strong>Requirements:</strong></p>
 
       <ul>
-        <li>Strong JavaScript skills</li>
+        <li>Strong JavaScript, HTML5 & CSS skills</li>
         <li>Experience with React</li>
         <li>Good problem-solving skills</li>
       </ul>
