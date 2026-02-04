@@ -39,15 +39,26 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import API_BASE_URL from "../services/api";
+import axios from "axios";
 
 function Blog() {
 
   const [blogs, setBlogs] = useState([]);
 
+  // useEffect(() => {
+  //   axios.get(`${API_BASE_URL}/api/blogs`)
+  //     .then(res => setBlogs(res.data))
+  //     .catch(err => console.error(err));
+  // }, []);
+
   useEffect(() => {
     fetch(`${API_BASE_URL}/api/blogs`)
-      .then(res => setBlogs(res.data))
-      .catch(err => console.error(err));
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); // ALWAYS debug once
+        setBlogs(Array.isArray(data) ? data : []);
+      })
+      .catch(error => console.error("Error fetching blogs:", error));
   }, []);
 
   return (
@@ -58,7 +69,7 @@ function Blog() {
       </p>
 {console.log(blogs)}
       <div className="card-container">
-        {/* {(Array.isArray(blogs) ? blogs : []).map(blog => ( */}
+        
         {blogs.map(blog => (
           <div className="blog-card" key={blog.id}>
             {/* <img
