@@ -1,7 +1,3 @@
-import axios from "axios";
+const API_BASE_URL = "https://apcs-api-hyceezatfxfhhta8.canadacentral-01.azurewebsites.net";
 
-const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL, // use REACT_APP_API_URL if CRA
-});
-
-export default API;
+export default API_BASE_URL;
