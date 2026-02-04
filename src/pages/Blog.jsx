@@ -56,9 +56,10 @@ function Blog() {
       <p className="text-center">
         Latest insights from our software experts
       </p>
-
+{console.log(blogs)}
       <div className="card-container">
-        {(Array.isArray(blogs) ? blogs : []).map(blog => (
+        {/* {(Array.isArray(blogs) ? blogs : []).map(blog => ( */}
+        {blogs.map(blog => (
           <div className="blog-card" key={blog.id}>
             {/* <img
               src="/images/blog-react.jpg" //{blog.image}
