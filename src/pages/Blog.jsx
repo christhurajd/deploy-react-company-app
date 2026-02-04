@@ -58,7 +58,7 @@ function Blog() {
       </p>
 
       <div className="card-container">
-        {blogs.map(blog => (
+        {(Array.isArray(blogs) ? blogs : []).map(blog => (
           <div className="blog-card" key={blog.id}>
             {/* <img
               src="/images/blog-react.jpg" //{blog.image}
