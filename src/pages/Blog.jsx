@@ -35,10 +35,21 @@
 
 // export default Blog;
 
-import blogs from "../data/blogs";
+//import blogs from "../data/blogs";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import API from "../services/api";
 
 function Blog() {
+
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    API.get("/api/blogs")
+      .then(res => setBlogs(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
   return (
     <div className="container">
       <h1 className="text-center">Our Blog</h1>
@@ -50,7 +61,7 @@ function Blog() {
         {blogs.map(blog => (
           <div className="blog-card" key={blog.id}>
             <img
-              src={blog.image}
+              src="/images/blog-react.jpg" //{blog.image}
               alt={blog.title}
               className="blog-img"
             />
