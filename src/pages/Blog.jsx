@@ -45,7 +45,7 @@ function Blog() {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    axios.get(`${API_BASE_URL}/api/blogs`)
+    fetch(`${API_BASE_URL}/api/blogs`)
       .then(res => setBlogs(res.data))
       .catch(err => console.error(err));
   }, []);
