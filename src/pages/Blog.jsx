@@ -60,11 +60,11 @@ function Blog() {
       <div className="card-container">
         {blogs.map(blog => (
           <div className="blog-card" key={blog.id}>
-            <img
+            {/* <img
               src="/images/blog-react.jpg" //{blog.image}
               alt={blog.title}
               className="blog-img"
-            />
+            /> */}
 
             <div className="blog-content">
               <h3>{blog.title}</h3>
