@@ -38,14 +38,14 @@
 //import blogs from "../data/blogs";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import API from "../services/api";
+import API_BASE_URL from "../services/api";
 
 function Blog() {
 
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    API.get("/api/blogs")
+    axios.get(`${API_BASE_URL}/api/blogs`)
       .then(res => setBlogs(res.data))
       .catch(err => console.error(err));
   }, []);
