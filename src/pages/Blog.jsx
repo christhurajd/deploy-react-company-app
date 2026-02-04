@@ -45,7 +45,7 @@ function Blog() {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    API.get("/api/blogs")
+    API.get(`${API_BASE_URL}/api/blogs`)
       .then(res => setBlogs(res.data))
       .catch(err => console.error(err));
   }, []);
