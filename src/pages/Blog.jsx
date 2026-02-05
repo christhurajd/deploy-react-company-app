@@ -40,6 +40,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import API_BASE_URL from "../services/api";
 import axios from "axios";
+import "./BlogCard.css";
 
 function Blog() {
 
@@ -79,7 +80,24 @@ function Blog() {
             />
 
             <div className="blog-content">
-              <h3>{blog.title}</h3>
+              {/* <h3>{blog.title}</h3> */}
+
+              <div className="blog-header">
+{/* blog.posterImageUrl || */}
+        <img
+          src={ "/images/default-user.jpg"}
+          alt="author"
+          className="poster-img"
+        />
+
+        <div>
+          <h2 className="blog-title">{blog.title}</h2>
+          <p className="author-name">
+            {blog.authorName || "Admin"}
+          </p>
+        </div>
+
+      </div>
               <p>{blog.shortDesc}</p>
 
               <Link to={`/blog/${blog.id}`} className="btn">
