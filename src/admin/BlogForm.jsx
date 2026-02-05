@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import apiClient from "../services/apiClient";
+import REACT_APP_API_URL from "../services/apiClient";
 
 function BlogForm({ initialData }) {
   const [title, setTitle] = useState("");
@@ -39,7 +39,16 @@ function BlogForm({ initialData }) {
       formData.append("Content", content);
       formData.append("Image", image);
 
-      const response = await apiClient.post("/blogs", formData);
+      const response = await fetch(
+      `${REACT_APP_API_URL}/blogs`,
+      {
+        method: "POST",
+        body: formData, // ✅ DO NOT add headers
+      }
+    );
+
+     
+    //  const response = await apiClient.post("/blogs", formData);
 
       alert("Blog created successfully!");
 
