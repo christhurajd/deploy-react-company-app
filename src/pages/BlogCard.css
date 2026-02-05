@@ -1,0 +1,49 @@
+.blog-card{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+  margin-bottom:20px;
+}
+
+/* HEADER */
+.blog-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+/* ROUND IMAGE */
+.poster-img{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #eee;
+}
+
+/* TITLE */
+.blog-title{
+  margin:0;
+  font-size:20px;
+}
+
+/* AUTHOR */
+.author-name{
+  margin:0;
+  color:gray;
+  font-size:14px;
+}
+
+.short-desc{
+  margin-top:12px;
+}
+
+/* BUTTON */
+.read-btn{
+  display:inline-block;
+  margin-top:10px;
+  color:#0077ff;
+  font-weight:600;
+  text-decoration:none;
+}
