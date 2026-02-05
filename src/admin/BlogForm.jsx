@@ -1,36 +1,127 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import apiClient from "../../services/apiClient";
 
 function BlogForm({ initialData }) {
-  const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [shortDesc, setShortDesc] = useState("");
+  const [content, setContent] = useState("");
+  const [image, setImage] = useState(null);
 
-  const [title, setTitle] = useState(initialData?.title || "");
-  const [content, setContent] = useState(initialData?.content || "");
+  const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  // Handle image selection
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ title, content });
-    navigate("/admin/blogs");
+
+    if (!image) {
+      alert("Please select an image");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const formData = new FormData();
+
+      formData.append("Title", title);
+      formData.append("ShortDesc", shortDesc);
+      formData.append("Content", content);
+      formData.append("Image", image);
+
+      const response = await apiClient.post("/blogs", formData);
+
+      alert("Blog created successfully!");
+
+      console.log(response.data);
+
+      // Reset form
+      setTitle("");
+      setShortDesc("");
+      setContent("");
+      setImage(null);
+      setPreview(null);
+
+    } catch (error) {
+      console.error(error);
+      alert("Failed to create blog");
+    }
+    finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} style={styles.form}>
-      <h2>{initialData ? "Edit Blog" : "Create Blog"}</h2>
+    <div style={styles.form}>
+      <h2>Create Blog</h2>
 
-      <input
-        placeholder="Blog Title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-      />
+      <form onSubmit={handleSubmit}>
 
-      <textarea
-        placeholder="Blog Content"
-        value={content}
-        onChange={e => setContent(e.target.value)}
-      />
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
 
-      <button style={styles.Btn} type="submit">Save</button>
-    </form>
+        <br /><br />
+
+        <input
+          type="text"
+          placeholder="Short Description"
+          value={shortDesc}
+          onChange={(e) => setShortDesc(e.target.value)}
+          required
+        />
+
+        <br /><br />
+
+        <textarea
+          placeholder="Content"
+          rows="6"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          required
+        />
+
+        <br /><br />
+
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          required
+        />
+
+        <br /><br />
+
+        {preview && (
+          <img
+            src={preview}
+            alt="preview"
+            width="200"
+          />
+        )}
+
+        <br /><br />
+
+        <button style={styles.Btn} disabled={loading}>
+          {loading ? "Uploading..." : "Create Blog"}
+        </button>
+
+      </form>
+    </div>
   );
 }
 
