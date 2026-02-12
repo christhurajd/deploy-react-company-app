@@ -702,3 +702,26 @@ th {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+.upload-btn {
+  background-color: #2563eb;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.upload-btn:hover {
+  background-color: #1e40af;
+}
+
+.action-icon {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.action-icon:hover {
+  transform: scale(1.25);
+}

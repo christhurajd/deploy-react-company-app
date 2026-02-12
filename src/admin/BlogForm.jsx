@@ -1,15 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import REACT_APP_API_URL from "../services/apiClient";
 
 
 function BlogForm({ initialData }) {
   const [title, setTitle] = useState("");
   const [shortDesc, setShortDesc] = useState("");
   const [content, setContent] = useState("");
+  const [authorName, setAuthorName] = useState("");
   const [image, setImage] = useState(null);
+  const [authImage, setAuthImage] = useState(null);
 
   const [preview, setPreview] = useState(null);
+  const [authPreview, setAuthPreview] = useState(null);
   const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+    if (initialData) {
+      setTitle(initialData.title || "");
+      setShortDesc(initialData.shortDesc || "");
+      setContent(initialData.content || "");
+      setAuthorName(initialData.authorName || "");
+      setImage(initialData.imageUrl || "");
+      setAuthImage(initialData.posterImageUrl || "");
+    }
+  }, [initialData]); // runs whenever initialData changes
 
   // Handle image selection
   const handleImageChange = (e) => {
@@ -20,12 +35,25 @@ function BlogForm({ initialData }) {
     setImage(file);
     setPreview(URL.createObjectURL(file));
   };
+ // Handle image selection
+  const handleAuthorImageChange = (e) => {
+    const file1 = e.target.files[0];
 
+    if (!file1) return;
+
+    setAuthImage(file1);
+    setAuthPreview(URL.createObjectURL(file1));
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!image) {
       alert("Please select an image");
+      return;
+    }
+
+    if (!authImage) {
+      alert("Please select an author image");
       return;
     }
 
@@ -38,6 +66,8 @@ function BlogForm({ initialData }) {
       formData.append("ShortDesc", shortDesc);
       formData.append("Content", content);
       formData.append("Image", image);
+      formData.append("AuthorImage", authImage);
+      formData.append("AuthorName", authorName);
 
       const response = await fetch(
       `${REACT_APP_API_URL}/blogs`,
@@ -58,8 +88,11 @@ function BlogForm({ initialData }) {
       setTitle("");
       setShortDesc("");
       setContent("");
+      setAuthorName("");
       setImage(null);
+      setAuthImage(null);
       setPreview(null);
+      setAuthPreview(null);
 
     } catch (error) {
       console.error(error);
@@ -105,19 +138,47 @@ function BlogForm({ initialData }) {
         />
 
         <br /><br />
+<input
+          type="text"
+          placeholder="Author Name"
+          value={authorName}
+          onChange={(e) => setAuthorName(e.target.value)}
+          required
+        />
 
+        <br /><br />
         <input
           type="file"
           accept="image/*"
           onChange={handleImageChange}
           required
         />
-
-        <br /><br />
-
-        {preview && (
+<br /><br />
+ {preview && (
           <img
             src={preview}
+            alt="preview"
+            width="200"
+          />
+        )}
+
+       
+        <input
+          type="file"
+          id="authorImage"
+          hidden
+         // accept="image/*"
+          onChange={handleAuthorImageChange}
+         // required
+        />
+        <label htmlFor="authorImage" className="upload-btn">
+  Choose Author Image
+</label>
+        <br /><br />
+
+        {authPreview && (
+          <img
+            src={authPreview}
             alt="preview"
             width="200"
           />
@@ -148,6 +209,8 @@ const styles = {
     border: "none",
     borderRadius: "5px"
   }
+
+  
 };
 
 export default BlogForm;

@@ -1,12 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import API_BASE_URL from "../services/api";
 import { blogData } from "./blogData";
 import { Link } from "react-router-dom";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
 
 function ManageBlogs() {
-  const [blogs, setBlogs] = useState(blogData);
+  const [blogs, setBlogs] = useState([]);
 
-  const deleteBlog = (id) => {
-    setBlogs(blogs.filter(blog => blog.id !== id));
+   useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const fetchBlogs = async () => {
+    const res = await fetch(`${API_BASE_URL}/api/blogs`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); // ALWAYS debug once
+        setBlogs(Array.isArray(data) ? data : []);
+      })
+      .catch(error => console.error("Error fetching blogs:", error));
+    
+  };
+
+  const handleDelete = async (id) => {
+
+    if (!window.confirm("Delete this blog?")) return;
+
+    await fetch(`${API_BASE_URL}/api/blogs/${id}`, {
+  method: "DELETE"
+});
+    fetchBlogs();
   };
 
   return (
@@ -31,12 +54,14 @@ function ManageBlogs() {
             <tr key={blog.id}>
               <td>{blog.title}</td>
               <td>
+                <div style={{ display: "flex", gap: "15px" }}>
                 <Link to={`/admin/blogs/edit/${blog.id}`}>
                   <button style={styles.Btn}>Edit</button>
                 </Link>
-                <button style={styles.Btn} onClick={() => deleteBlog(blog.id)}>
+                <button style={styles.Btn} onClick={() => handleDelete(blog.id)}>
                   Delete
                 </button>
+                </div>
               </td>
             </tr>
           ))}
