@@ -83,9 +83,8 @@ function Blog() {
               {/* <h3>{blog.title}</h3> */}
 
               <div className="blog-header">
-{/* blog.posterImageUrl || */}
         <img
-          src={ "/images/default-user.jpg"}
+          src={ blog.posterImageUrl || "/images/default-user.png"}
           alt="author"
           className="poster-img"
         />
