@@ -1,5 +1,7 @@
 const API_URL = "https://apcs-api-hyceezatfxfhhta8.canadacentral-01.azurewebsites.net/api/jobs";
 
+const API= "https://apcs-api-hyceezatfxfhhta8.canadacentral-01.azurewebsites.net/api";
+
 
 export async function applyJob(formData) {
 
@@ -86,4 +88,17 @@ export async function deleteJob(id) {
   if (!response.ok) {
     throw new Error("Delete failed");
   }
+}
+
+export async function getApplications() {
+
+  const response = await fetch(
+    `${API}/jobapplications`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch applications");
+  }
+
+  return response.json();
 }

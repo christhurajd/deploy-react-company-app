@@ -19,7 +19,7 @@ const [jobs, setJobs] = useState([]);
   };
 
     const result = await getJobs(params);
-    setJobs(result);
+    setJobs(result.data);
   };
 
   const handleDelete = async (id) => {
