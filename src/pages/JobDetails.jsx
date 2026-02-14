@@ -1,30 +1,107 @@
 import { useParams, Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getJobById,applyJob } from "../services/jobService";
 
 function JobDetails() {
+
   const { id } = useParams();
+
+  // ✅ ALWAYS object for details
+  const [job, setJob] = useState(null);
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (id) loadJob();
+  }, [id]);
+
+  const loadJob = async () => {
+    try {
+
+      const data = await getJobById(id);
+
+      console.log("Job:", data); // debug once
+
+      // handles array mistake from backend
+      setJob(Array.isArray(data) ? data[0] : data);
+
+    } catch (err) {
+
+      console.error(err);
+      setError("Failed to load job details");
+
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ✅ Professional UI states
+  if (loading) return <h2 style={{ padding: "40px" }}>Loading job...</h2>;
+
+  if (error) return <h2 style={{ padding: "40px" }}>{error}</h2>;
+
+  if (!job) return <h2 style={{ padding: "40px" }}>Job not found</h2>;
 
   return (
     <div style={{ padding: "40px" }}>
+
       <Link to="/careers">← Back to Careers</Link>
 
-      <h1 style={{ marginTop: "20px" }}>Job Details</h1>
+      <h1 style={{ marginTop: "20px" }}>{job.title}</h1>
 
-      {/* <p><strong>Job ID:</strong> {id}</p> */}
-      <p><strong>Role:</strong> Software Engineer</p>
-      <p><strong>Requirements:</strong></p>
+      <p><strong>Location:</strong> {job.location}</p>
+      <p><strong>Experience:</strong> {job.experience}</p>
 
-      <ul>
-        <li>Strong JavaScript, HTML5 & CSS skills</li>
-        <li>Experience with React</li>
-        <li>Good problem-solving skills</li>
-      </ul>
+      {/* If you saved HTML description */}
+      {/* {job.description && (
+        <>
+          <h3>Job Description</h3>
 
-      <h3 style={{ marginTop: "30px" }}>Apply for this job</h3>
-      <ApplyForm />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: job.description
+            }}
+          />
+        </>
+      )} */}
+
+      <h3 style={{ marginTop: "40px" }}>
+        Apply for this job
+      </h3>
+
+      <ApplyForm jobId={job.id} />
     </div>
   );
 }
+
+// import { useParams, Link } from "react-router-dom";
+// import { useState } from "react";
+
+// function JobDetails() {
+//   const { id } = useParams();
+
+//   return (
+//     <div style={{ padding: "40px" }}>
+//       <Link to="/careers">← Back to Careers</Link>
+
+//       <h1 style={{ marginTop: "20px" }}>Job Details</h1>
+
+//       {/* <p><strong>Job ID:</strong> {id}</p> */}
+//       <p><strong>Role:</strong> Software Engineer</p>
+//       <p><strong>Requirements:</strong></p>
+
+//       <ul>
+//         <li>Strong JavaScript, HTML5 & CSS skills</li>
+//         <li>Experience with React</li>
+//         <li>Good problem-solving skills</li>
+//       </ul>
+
+//       <h3 style={{ marginTop: "30px" }}>Apply for this job</h3>
+//       <ApplyForm />
+//     </div>
+//   );
+// }
 
 function ApplyForm() {
 
@@ -49,7 +126,7 @@ function ApplyForm() {
       
       return newErrors;
     };
-    const handleSubmit = (e) => {
+    const  handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
 
@@ -59,7 +136,18 @@ function ApplyForm() {
     }
 
     // Mock submit (API later)
-    console.log("Job Form Data:", form);
+
+    const formData = new FormData();
+
+formData.append("name", form.name);
+formData.append("email", form.email);
+formData.append("phoneNumber", form.phonenumber);
+formData.append("jobId", jobId);
+formData.append("resume", file);
+await applyJob(formData);
+
+
+    console.log("Job Form Data:", formData);
     setSubmitted(true);
     setForm({ name: "", email: "", phonenumber: "" });
     setErrors({});
@@ -97,6 +185,20 @@ function ApplyForm() {
             onChange={handleChange}
           />
           {errors.phonenumber && <span style={styles.error}>{errors.phonenumber}</span>}
+
+           {/* ⭐ FILE INPUT */}
+        <input
+          type="file"
+          accept=".pdf,.doc,.docx"
+          onChange={(e) =>
+            setFile(e.target.files[0])
+          }
+        />
+
+        {errors.resume && (
+          <span style={styles.error}>{errors.resume}</span>
+        )}
+        
         {/* <input placeholder="Phone Number" /> */}
         <textarea placeholder="Why should we hire you?" />
         <button style={styles.btn} onClick={handleSubmit} type="submit">Submit</button>
@@ -105,7 +207,11 @@ function ApplyForm() {
   );
 }
 
-const styles = {
+
+
+ export default JobDetails;
+
+ const styles = {
  form: {
     maxWidth: "400px",
     display: "flex",
@@ -125,5 +231,3 @@ const styles = {
     fontSize: "12px"
   }
 };
-
-export default JobDetails;

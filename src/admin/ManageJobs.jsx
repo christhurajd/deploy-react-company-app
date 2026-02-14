@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
+
 import { getJobs, deleteJob } from "../services/jobService";
 import { Link } from "react-router-dom";
 
 const ManageJobs = () => {
-  const [jobs, setJobs] = useState([]);
+const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
     loadJobs();
   }, []);
 
   const loadJobs = async () => {
-    const result = await getJobs();
-    setJobs(result.data);
+     const params = {
+    // page: page,
+    // pageSize: pageSize,
+    // search: search,
+    // location: location
+  };
+
+    const result = await getJobs(params);
+    setJobs(result);
   };
 
   const handleDelete = async (id) => {
@@ -26,7 +34,7 @@ const ManageJobs = () => {
       <h2>Manage Jobs</h2>
 
       <Link to="/admin/jobs/create">
-        <button>Add Job</button>
+        <button style={ styles.Btn}>Add Job</button>
       </Link>
 
       <table border="1" cellPadding="10" style={{ marginTop: "20px", width: "100%" }}>
@@ -41,7 +49,8 @@ const ManageJobs = () => {
         </thead>
 
         <tbody>
-          {jobs.map((job) => (
+          {console.log(jobs)}
+          {jobs?.map((job) => (
             <tr key={job.id}>
               <td>{job.title}</td>
               <td>{job.location}</td>
@@ -49,16 +58,18 @@ const ManageJobs = () => {
               <td>{new Date(job.createdAt).toLocaleDateString()}</td>
 
               <td>
-                <Link to={`admin/jobs/edit/${job.id}`}>
-                  <button>Edit</button>
+                <div style={{ display: "flex", gap: "15px" }}>
+                <Link to={`/admin/jobs/edit/${job.id}`}>
+                  <button style={ styles.Btn}>Edit</button>
                 </Link>
 
                 <button
                   onClick={() => handleDelete(job.id)}
-                  style={{ marginLeft: "10px", color: "red" }}
+                  style={ styles.Btn}
                 >
                   Delete
                 </button>
+                </div>
               </td>
             </tr>
           ))}
@@ -138,3 +149,20 @@ export default ManageJobs;
 // };
 
 // export default ManageJobs;
+const styles = {
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    maxWidth: "500px"
+  },
+  Btn: {
+    padding: "10px 18px",
+    background: "#2563eb",
+    color: "white",
+    border: "none",
+    borderRadius: "5px"
+  }
+
+  
+};

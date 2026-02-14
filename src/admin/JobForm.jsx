@@ -18,7 +18,7 @@ const JobForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await createJob(job);
-    navigate("/");
+    navigate("/admin/jobs");
   };
 
   return (
