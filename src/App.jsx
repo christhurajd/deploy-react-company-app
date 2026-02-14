@@ -23,6 +23,7 @@ import EditBlog from "./admin/EditBlog";
 import ManageJobs from "./admin/ManageJobs";
 import CreateJob from "./admin/CreateJob";
 import EditJob from "./admin/EditJob";
+import AdminApplications from "./admin/AdminApplications";
 
 import ChatWidget from "./components/ChatWidget";
 function App() {
@@ -99,6 +100,11 @@ function App() {
       <CreateJob />
     </ProtectedRoute>
   }
+/>
+
+<Route
+  path="/admin/applications"
+  element={<AdminApplications />}
 />
 
 <Route

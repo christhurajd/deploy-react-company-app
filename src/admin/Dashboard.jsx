@@ -38,6 +38,10 @@ function Dashboard() {
         <Link to="/admin/jobs">
           <button style={styles.btn}>Manage Jobs</button>
         </Link>
+        <Link to="/admin/applications">
+        <button style={styles.btn}>View Applications</button>
+   
+</Link>
         <button style={styles.logoutBtn} onClick={logout}>
           Logout
         </button>
