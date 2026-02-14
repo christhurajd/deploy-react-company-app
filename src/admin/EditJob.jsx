@@ -12,7 +12,7 @@
 // export default EditJob;
 
 import React, { useEffect, useState } from "react";
-import { getJob, updateJob } from "../services/jobService";
+import { getJobById, updateJob } from "../services/jobService";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditJob = () => {
@@ -30,8 +30,9 @@ const EditJob = () => {
   }, []);
 
   const loadJob = async () => {
-    const result = await getJob(id);
-    setJob(result.data);
+    const result = await getJobById(id);
+    setJob(Array.isArray(result) ? result[0] : result);
+   // setJob(result.data);
   };
 
   const handleChange = (e) => {
@@ -41,17 +42,18 @@ const EditJob = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await updateJob(id, job);
-    navigate("/");
+    navigate("/admin/jobs");
   };
 
   return (
     <div style={{ padding: "20px" }}>
       <h2>Edit Job</h2>
-
+{console.log("Chris Test"+job)}
       <form onSubmit={handleSubmit}>
         <input
           name="title"
-          value={job.title}
+          placeholder="Title"
+          value={job?.title|| "" }
           onChange={handleChange}
           required
         />
@@ -59,7 +61,8 @@ const EditJob = () => {
 
         <input
           name="location"
-          value={job.location}
+          placeholder="Location"
+          value={job?.location || ""}
           onChange={handleChange}
           required
         />
@@ -67,16 +70,35 @@ const EditJob = () => {
 
         <input
           name="experience"
-          value={job.experience}
+          placeholder="Experience"
+          value={job?.experience || ""}
           onChange={handleChange}
           required
         />
         <br /><br />
 
-        <button type="submit">Update</button>
+        <button style={ styles.Btn} type="submit">Update</button>
       </form>
     </div>
   );
 };
 
 export default EditJob;
+
+const styles = {
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    maxWidth: "500px"
+  },
+  Btn: {
+    padding: "10px 18px",
+    background: "#2563eb",
+    color: "white",
+    border: "none",
+    borderRadius: "5px"
+  }
+
+  
+};

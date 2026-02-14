@@ -1,18 +1,48 @@
 const API_URL = "https://apcs-api-hyceezatfxfhhta8.canadacentral-01.azurewebsites.net/api/jobs";
 
+
+export async function applyJob(formData) {
+
+  const res = await fetch(`${API_URL}/apply`, {
+    method: "POST",
+    body: formData
+  });
+
+  if (!res.ok)
+    throw new Error("Application failed");
+}
+
+
 // HANDLE RESPONSE
 async function handleResponse(response) {
+
   if (!response.ok) {
-    const error = await response.text();
-    throw new Error(error || "API Error");
+    throw new Error("API Error");
   }
-  return response.json();
+
+  // ⭐ IMPORTANT FIX
+  if (response.status === 204) {
+    return null;
+  }
+
+  const text = await response.text();
+
+  return text ? JSON.parse(text) : null;
 }
 
 // GET ALL JOBS
-export async function getJobs() {
-  const response = await fetch(API_URL);
-  return handleResponse(response);
+// export async function getJobs() {
+//   const response = await fetch(API_URL);
+//   return handleResponse(response);
+// }
+
+export async function getJobs(params) {
+
+ const query = new URLSearchParams(params);
+
+ const res = await fetch(`${API_URL}?${query}`);
+return handleResponse(res);
+ //return res.json();
 }
 
 // GET JOB BY ID
