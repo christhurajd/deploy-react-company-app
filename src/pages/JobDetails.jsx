@@ -103,13 +103,15 @@ function JobDetails() {
 //   );
 // }
 
-function ApplyForm() {
+function ApplyForm({ jobId }) {
 
   const [form, setForm] = useState({
       name: "",
       email: "",
       phonenumber: ""
     });
+
+    const [file, setFile] = useState(null);
   
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
@@ -138,16 +140,17 @@ function ApplyForm() {
     // Mock submit (API later)
 
     const formData = new FormData();
-
+console.log("test: "+form.name)
 formData.append("name", form.name);
 formData.append("email", form.email);
 formData.append("phoneNumber", form.phonenumber);
 formData.append("jobId", jobId);
 formData.append("resume", file);
+console.log("Job Form Data:", [...formData.entries()]);
 await applyJob(formData);
 
 
-    console.log("Job Form Data:", formData);
+    
     setSubmitted(true);
     setForm({ name: "", email: "", phonenumber: "" });
     setErrors({});

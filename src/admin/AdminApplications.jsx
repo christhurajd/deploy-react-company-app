@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getApplications } from "../services/jobService";
+import { Link } from "react-router-dom";
 
 function AdminApplications() {
 
@@ -39,6 +40,7 @@ function AdminApplications() {
 
   return (
     <div style={{ padding: "40px" }}>
+        <Link to="/admin/dashboard">← Back to Dashboard</Link>
       <h1>Job Applications</h1>
 
       <table style={styles.table}>

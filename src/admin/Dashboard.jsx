@@ -15,8 +15,8 @@ function Dashboard() {
 
   return (
     <div style={{ padding: "40px" }}>
-      <h1>Admin Dashboard</h1>
-      <p>Manage your website content from here.</p>
+      <h1>Dashboard</h1>
+      {/* <p>Manage your website content from here.</p> */}
 
       {/* Stats Cards */}
       <div style={styles.cardContainer}>

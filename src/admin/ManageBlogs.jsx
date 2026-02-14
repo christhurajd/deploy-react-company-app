@@ -34,6 +34,7 @@ function ManageBlogs() {
 
   return (
     <div style={{ padding: "40px" }}>
+       <Link to="/admin/dashboard">← Back to Dashboard</Link>
       <h1>Manage Blogs</h1>
 
       <Link to="/admin/blogs/create">

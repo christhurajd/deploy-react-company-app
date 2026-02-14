@@ -31,6 +31,7 @@ const [jobs, setJobs] = useState([]);
 
   return (
     <div style={{ padding: "20px" }}>
+      <Link to="/admin/dashboard">← Back to Dashboard</Link>
       <h2>Manage Jobs</h2>
 
       <Link to="/admin/jobs/create">
