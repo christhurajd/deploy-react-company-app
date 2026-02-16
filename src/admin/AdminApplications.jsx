@@ -56,11 +56,11 @@ function AdminApplications() {
         <tbody>
           {applications.map(app => (
             <tr key={app.id}>
-              <td>{app.name}</td>
-              <td>{app.email}</td>
-              <td>{app.phoneNumber}</td>
+              <td data-label="Name">{app.name}</td>
+              <td data-label="Email">{app.email}</td>
+              <td data-label="Phone">{app.phoneNumber}</td>
 
-              <td>
+              <td data-label="Resume">
 
                 {/* VIEW */}
                 <button
@@ -74,7 +74,7 @@ function AdminApplications() {
                 >
                   View
                 </button>
-
+<br/><br/>
                 {/* DOWNLOAD */}
                 <a
                   href={app.resumeUrl}

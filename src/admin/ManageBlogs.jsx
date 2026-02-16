@@ -53,8 +53,8 @@ function ManageBlogs() {
         <tbody>
           {blogs.map(blog => (
             <tr key={blog.id}>
-              <td>{blog.title}</td>
-              <td>
+              <td data-label="Title">{blog.title}</td>
+              <td data-label="Actions">
                 <div style={{ display: "flex", gap: "15px" }}>
                 <Link to={`/admin/blogs/edit/${blog.id}`}>
                   <button style={styles.Btn}>Edit</button>

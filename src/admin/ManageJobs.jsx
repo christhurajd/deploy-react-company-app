@@ -53,12 +53,12 @@ const [jobs, setJobs] = useState([]);
           {console.log(jobs)}
           {jobs?.map((job) => (
             <tr key={job.id}>
-              <td>{job.title}</td>
-              <td>{job.location}</td>
-              <td>{job.experience}</td>
-              <td>{new Date(job.createdAt).toLocaleDateString()}</td>
+              <td data-label="Title">{job.title}</td>
+              <td data-label="Location">{job.location}</td>
+              <td data-label="Experience">{job.experience}</td>
+              <td data-label="Created">{new Date(job.createdAt).toLocaleDateString()}</td>
 
-              <td>
+              <td data-label="Actions">
                 <div style={{ display: "flex", gap: "15px" }}>
                 <Link to={`/admin/jobs/edit/${job.id}`}>
                   <button style={ styles.Btn}>Edit</button>
