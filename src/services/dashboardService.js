@@ -1,5 +1,5 @@
 
-const API_URL= "https://apcs-api-hyceezatfxfhhta8.canadacentral-01.azurewebsites.net"
+const API_URL= "https://apcs-api-hyceezatfxfhhta8.canadacentral-01.azurewebsites.net/api"
 export const getDashboardStats = async () => {
 
   const response = await fetch(
