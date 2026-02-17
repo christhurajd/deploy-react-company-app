@@ -20,7 +20,12 @@ return(
 <div style={{padding:"40px"}}>
 
 <h1>Our Services</h1>
- <div className="card-container">
+<p className="services-subtitle">
+      We offer end-to-end software development services to help your
+    business grow digitally.
+     </p>
+ <div className="services-grid">
+ <div className="service-card">
 
 {services.map(s=>(
 <div key={s.id}>
@@ -36,6 +41,7 @@ width="200"/>
 
 </div>
 ))}
+</div>
 </div>
 </div>
 );
