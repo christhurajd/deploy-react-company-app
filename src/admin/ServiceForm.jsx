@@ -81,9 +81,26 @@ function ServiceForm() {
              onChange={e =>
                setImage(e.target.files[0])}/>
 
-      <button>Save</button>
+      <button style={styles.Btn}>Save</button>
     </form>
   );
 }
 
+
 export default ServiceForm;
+
+const styles = {
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    maxWidth: "500px"
+  },
+  Btn: {
+    padding: "10px 18px",
+    background: "#2563eb",
+    color: "white",
+    border: "none",
+    borderRadius: "5px"
+  }
+}
