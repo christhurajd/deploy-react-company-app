@@ -25,6 +25,11 @@ import CreateJob from "./admin/CreateJob";
 import EditJob from "./admin/EditJob";
 import AdminApplications from "./admin/AdminApplications";
 
+
+import ManageServices from "./admin/ManageServices";
+import ServiceForm from "./admin/ServiceForm";
+// import EditJob from "./admin/EditJob";
+
 import ChatWidget from "./components/ChatWidget";
 function App() {
   return (
@@ -46,6 +51,15 @@ function App() {
 
           <Route path="/admin/login" element={<AdminLogin />} />
           
+           <Route path="/services" element={<Services/>} /> 
+<Route path="/admin/services"
+       element={<ManageServices/>}/>
+
+<Route path="/admin/add-service"
+       element={<ServiceForm/>}/>
+
+<Route path="/admin/edit-service/:id"
+       element={<ServiceForm/>}/>
 
           <Route
   path="/admin/dashboard"
