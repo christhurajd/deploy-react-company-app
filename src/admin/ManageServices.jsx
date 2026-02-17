@@ -28,7 +28,7 @@ function ManageServices() {
       <h2>Manage Services</h2>
 
       <Link to="/admin/add-service">
-        Add Service
+      <button style={styles.createBtn} > Add Service</button> 
       </Link>
 
       {services.map(s => (
@@ -46,10 +46,10 @@ function ManageServices() {
           <p>{s.price}</p>
 
           <Link to={`/admin/edit-service/${s.id}`}>
-            Edit
+           <button style={styles.createBtn}>Edit</button> 
           </Link>
 
-          <button onClick={() => remove(s.id)}>
+          <button style={styles.createBtn} onClick={() => remove(s.id)}>
             Delete
           </button>
         </div>
