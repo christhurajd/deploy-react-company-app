@@ -19,6 +19,7 @@ function Dashboard() {
         setStats([
           { title: "Total Blogs", count: data.totalBlogs , link: "/admin/blogs"},
           { title: "Job Openings", count: data.totalJobs, link: "/admin/jobs" },
+          { title: "Services", count: data.totalJobs, link: "/admin/services" },
           { title: "Messages", count: data.totalMessages, link: "/admin/applications" }
         ]);
 
