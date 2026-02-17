@@ -25,6 +25,7 @@ function ManageServices() {
 
   return (
     <div style={{padding:"40px"}}>
+        <Link to="/admin/dashboard">← Back to Dashboard</Link>
       <h2>Manage Services</h2>
 
       <Link to="/admin/add-service">
