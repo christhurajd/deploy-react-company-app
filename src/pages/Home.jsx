@@ -274,8 +274,8 @@ function Home() {
     <div className="contact-box">
       <h3>APCS Pvt Ltd</h3>
       <p>
-        No. 150/3, Thalayampallam,<br />
-        Nariyapattu(post), Tiruvannamalai – 606753,<br />
+        No.  561A, LAKSHMIPURAM, KANGEYANALLUR,<br />
+        GANDHI NAGAR PO , KATPADI TK VELLORE – 632006.,<br />
         Tamil Nadu, India
       </p>
 
