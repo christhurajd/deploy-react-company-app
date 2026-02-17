@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import {getServices}
 from "../services/serviceApi";
@@ -18,12 +17,13 @@ setServices(data);
 
 return(
 <div style={{padding:"40px"}}>
-
-<h1>Our Services</h1>
-<p className="services-subtitle">
+ <section className="services-section">
+  <div className="services-container">
+ <h2 className="services-title">Our Services</h2>
+    <p className="services-subtitle">
       We offer end-to-end software development services to help your
-    business grow digitally.
-     </p>
+      business grow digitally.
+    </p>
  <div className="services-grid">
  <div className="service-card">
 
@@ -44,6 +44,8 @@ width="200"/>
 </div>
 </div>
 </div>
+</section>
+    </div>
 );
 }
 
@@ -56,13 +58,14 @@ const styles = {
   }
 };
 export default Services;
+
 // import ServiceCard from "../components/ServiceCard";
 
 // function Services() {
 //   const services = [
 //     {
 //       title: "Full Stack SaaS Development",
-//       description: " "
+//       description: "Full stack SaaS development involves mastering both front-end and back-end technologies to create comprehensive web applications. Developers proficient in languages like JavaScript for front-end, PHP and .NET for back-end, and frameworks such as Vue.js for the front-end and Laravel for the back-end, along with databases like MongoDB, can build scalable solutions deployed on cloud platforms like AWS or Azure, ensuring end-to-end functionality and performance."
 //     },
 //     {
 //       title: "Website Development",
