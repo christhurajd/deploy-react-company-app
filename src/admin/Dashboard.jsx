@@ -44,6 +44,7 @@ function Dashboard() {
             key={index}
             title={stat.title}
             count={stat.count}
+            link={stat.link} // 👈 ADD THIS
           />
         ))}
       </div>
