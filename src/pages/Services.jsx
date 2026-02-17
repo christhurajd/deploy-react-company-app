@@ -25,9 +25,10 @@ return(
       business grow digitally.
     </p>
  <div className="services-grid">
- <div className="service-card">
+ 
 
 {services.map(s=>(
+    <div className="service-card">
 <div key={s.id}>
 
 <img src={s.imageUrl}
@@ -38,10 +39,10 @@ width="200"/>
 <p>{s.description}</p>
 
 <b>${s.price}</b>
-
+</div>
 </div>
 ))}
-</div>
+
 </div>
 </div>
 </section>
