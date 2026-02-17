@@ -43,12 +43,14 @@ function ManageServices() {
           />
 
           <h3>{s.title}</h3>
+           <h3>{s.description}</h3>
           <p>{s.price}</p>
 
           <Link to={`/admin/edit-service/${s.id}`}>
            <button style={styles.createBtn}>Edit</button> 
           </Link>
-
+<br/>
+<br/>
           <button style={styles.createBtn} onClick={() => remove(s.id)}>
             Delete
           </button>

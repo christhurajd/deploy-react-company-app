@@ -47,7 +47,7 @@ export default Services;
 //   const services = [
 //     {
 //       title: "Full Stack SaaS Development",
-//       description: "Full stack SaaS development involves mastering both front-end and back-end technologies to create comprehensive web applications. Developers proficient in languages like JavaScript for front-end, PHP and .NET for back-end, and frameworks such as Vue.js for the front-end and Laravel for the back-end, along with databases like MongoDB, can build scalable solutions deployed on cloud platforms like AWS or Azure, ensuring end-to-end functionality and performance."
+//       description: " "
 //     },
 //     {
 //       title: "Website Development",
