@@ -1,6 +1,9 @@
-function DashboardCard({ title, count }) {
+import { useNavigate } from "react-router-dom";
+function DashboardCard({ title, count, link }) {
+
+  const navigate = useNavigate();
   return (
-    <div style={styles.card}>
+    <div  onClick={() => navigate(link)} style={styles.card}>
       <h3>{title}</h3>
       <p style={styles.count}>{count}</p>
     </div>
