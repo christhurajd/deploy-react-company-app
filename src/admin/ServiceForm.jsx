@@ -1,68 +1,89 @@
-import { useState } from "react";
-import { createService } from "../services/serviceApi";
+import { useState, useEffect } from "react";
+import {
+  createService,
+  getService,
+  updateService
+} from "../services/serviceApi";
+import { useNavigate, useParams } from "react-router-dom";
 
 function ServiceForm() {
 
-  const [form, setForm] = useState({
-    title: "",
-    description: "",
-    price: ""
+  const [service, setService] = useState({
+    title:"",
+    description:"",
+    price:""
   });
 
   const [image, setImage] = useState(null);
 
-  const handleSubmit = async (e) => {
+  const navigate = useNavigate();
+  const {id} = useParams();
+
+  useEffect(() => {
+    if(id) load();
+  }, []);
+
+  const load = async () => {
+    const data = await getService(id);
+    setService(data);
+  };
+
+  const handleChange = e =>
+    setService({
+      ...service,
+      [e.target.name]: e.target.value
+    });
+
+  const submit = async e => {
+
     e.preventDefault();
 
-    const data = new FormData();
+    const fd = new FormData();
 
-    data.append("Title", form.title);
-    data.append("Description", form.description);
-    data.append("Price", form.price);
-    data.append("Image", image);
+    fd.append("title", service.title);
+    fd.append("description", service.description);
+    fd.append("price", service.price);
 
-    await createService(data);
+    if(image)
+      fd.append("image", image);
 
-    alert("Service Created!");
+    if(id)
+      await updateService(id, fd);
+    else
+      await createService(fd);
+
+    navigate("/admin/services");
   };
 
   return (
-    <form style={styles.form} onSubmit={handleSubmit}>
-      <input placeholder="Title"
-        onChange={e=>setForm({...form,title:e.target.value})}
-      />
+    <form onSubmit={submit}
+          style={{padding:"40px",
+                  display:"flex",
+                  flexDirection:"column",
+                  gap:"10px"}}>
 
-      <textarea placeholder="Description"
-        onChange={e=>setForm({...form,description:e.target.value})}
-      />
+      <input name="title"
+             placeholder="Title"
+             value={service.title}
+             onChange={handleChange}/>
 
-      <input type="number" placeholder="Price"
-        onChange={e=>setForm({...form,price:e.target.value})}
-      />
+      <textarea name="description"
+                placeholder="Description"
+                value={service.description}
+                onChange={handleChange}/>
+
+      <input name="price"
+             placeholder="Price"
+             value={service.price}
+             onChange={handleChange}/>
 
       <input type="file"
-        onChange={e=>setImage(e.target.files[0])}
-      />
+             onChange={e =>
+               setImage(e.target.files[0])}/>
 
-      <button style={styles.Btn}>Create Service</button>
+      <button>Save</button>
     </form>
   );
 }
-const styles = {
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-    maxWidth: "500px"
-  },
-  Btn: {
-    padding: "10px 18px",
-    background: "#2563eb",
-    color: "white",
-    border: "none",
-    borderRadius: "5px"
-  }
 
-  
-};
 export default ServiceForm;

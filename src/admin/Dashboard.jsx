@@ -60,6 +60,9 @@ function Dashboard() {
         <Link to="/admin/jobs">
           <button style={styles.btn}>Manage Jobs</button>
         </Link>
+        <Link to="/admin/services">
+          <button style={styles.btn}>Manage services</button>
+        </Link>
 
         <Link to="/admin/applications">
           <button style={styles.btn}>View Applications</button>
