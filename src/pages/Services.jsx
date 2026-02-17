@@ -20,6 +20,7 @@ return(
 <div style={{padding:"40px"}}>
 
 <h1>Our Services</h1>
+ <div className="card-container">
 
 {services.map(s=>(
 <div key={s.id}>
@@ -35,11 +36,19 @@ width="200"/>
 
 </div>
 ))}
-
+</div>
 </div>
 );
 }
 
+const styles = {
+  cardContainer: {
+    display: "flex",
+    gap: "20px",
+    marginTop: "30px",
+    flexWrap: "wrap"
+  }
+};
 export default Services;
 // import ServiceCard from "../components/ServiceCard";
 
